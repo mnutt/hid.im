@@ -1,0 +1,2 @@
+module PiingsHelper
+end

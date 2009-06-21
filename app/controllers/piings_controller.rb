@@ -1,0 +1,2 @@
+class PiingsController < ApplicationController
+end

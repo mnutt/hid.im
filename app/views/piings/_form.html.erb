@@ -1,0 +1,4 @@
+<% form_for @piing, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :torrent %>
+  <%= submit_tag "Submit" -%>
+<% end %>

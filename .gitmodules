@@ -1,0 +1,6 @@
+[submodule "vendor/plugins/paperclip"]
+	path = vendor/plugins/paperclip
+	url = git://github.com/thoughtbot/paperclip.git
+[submodule "vendor/plugins/png"]
+	path = vendor/plugins/png
+	url = git://github.com/seattlerb/png.git

@@ -9,7 +9,7 @@ config/database.yml
 config/development.sphinx.conf
 config/test.sphinx.conf
 private/*.txt
-public/logos/*
+public/system/*
 db/*.sqlite3
 db/sphinx/*
 .#*

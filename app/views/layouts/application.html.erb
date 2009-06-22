@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>
+    hid.im
+  </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="description" content="Encode your torrents to images"/>
+
+  <%= stylesheet_link_tag "application" -%>
+
+  <!--[if IE 6]>
+    <%= stylesheet_link_tag 'base_ie6', 'application_ie6' -%>
+  <![endif]-->
+  <!--[if IE 7]>
+    <%= stylesheet_link_tag 'base_ie7', 'application_ie7' -%>
+  <![endif]-->
+
+  <%= javascript_include_tag 'jquery', 
+                             :cache => 'jquery-all' -%>
+</head>
+
+<body>
+
+  <h1>hid.im</h1>
+
+  <div id="content">
+  
+    <% unless flash[:notice].blank? -%>
+      <div id="notice">
+	<% if Array === flash[:notice] -%>
+          <%= flash[:notice].map{|line| "<p>#{line}</p>"} -%>
+	<% else -%>
+          <%= flash[:notice] -%>
+	<% end -%>
+      </div>
+    <% end -%>
+    
+    <%= yield %>
+
+    </div>
+
+</body>
+</html>

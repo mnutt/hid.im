@@ -9,11 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090621160009) do
+ActiveRecord::Schema.define(:version => 20090621160442) do
 
   create_table "piings", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "torrent_file_name"
+    t.string   "torrent_content_type"
+    t.integer  "torrent_file_size"
+    t.datetime "torrent_updated_at"
+    t.string   "png_file_name"
+    t.string   "png_content_type"
+    t.integer  "png_file_size"
+    t.datetime "png_updated_at"
   end
 
 end

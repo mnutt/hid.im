@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="description" content="Encode your torrents to images"/>
 
-  <%= stylesheet_link_tag "application" -%>
+  <%= stylesheet_link_tag "application", 'uploadify' -%>
 
   <!--[if IE 6]>
     <%= stylesheet_link_tag 'base_ie6', 'application_ie6' -%>
@@ -16,7 +16,7 @@
     <%= stylesheet_link_tag 'base_ie7', 'application_ie7' -%>
   <![endif]-->
 
-  <%= javascript_include_tag 'jquery', 
+  <%= javascript_include_tag 'jquery', 'jquery.uploadify', 'read_png',
                              :cache => 'jquery-all' -%>
 </head>
 

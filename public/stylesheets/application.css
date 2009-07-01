@@ -1,7 +1,8 @@
 body {
-  background: #333 url('../images/repeat.png') top left repeat-y;
+  background: #2e2929 url('../images/repeat.png') top left repeat-y;
   margin: 0;
   color: #FFF;
+  font-family: Helvetica, sans-serif;
 }
 #recent ul li {
   list-style: none;
@@ -17,6 +18,11 @@ h1 {
   text-indent: -10000px;
   background: url('../images/background.png') top left no-repeat;
   margin: 0 0;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: 600;
 }
 #content {
   margin-left: 250px;

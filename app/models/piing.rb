@@ -8,9 +8,21 @@ class Piing < ActiveRecord::Base
 
   before_save :convert_to_png
 
+  def name
+    "thingy.torrent"
+  end
+
+  def hashed
+    "1234567890abcdef"
+  end
+
   def convert_to_png
     content = self.torrent.queued_for_write[:original].read
-    decimal = content.unpack("C*")
+    key = "hidim is torrents!".unpack("C*")
+    metadata =  "i#{content.size.to_s}e"
+    metadata += "#{self.name.size.to_s}:#{self.name}"
+    metadata += "#{self.hash.size}:#{self.hash}"
+    decimal = key  + metadata.unpack("C*") + content.unpack("C*")
 
     font_width = 5
     height = 30

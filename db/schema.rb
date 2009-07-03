@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090621160442) do
+ActiveRecord::Schema.define(:version => 20090703002156) do
 
   create_table "piings", :force => true do |t|
     t.datetime "created_at"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20090621160442) do
     t.string   "png_content_type"
     t.integer  "png_file_size"
     t.datetime "png_updated_at"
+    t.boolean  "featured"
   end
 
 end

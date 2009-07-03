@@ -15,6 +15,6 @@ class PiingsController < ApplicationController
   def index
     @piing = Piing.new
 
-    @piings = Piing.find(:all, :limit => 10, :order => "created_at DESC")
+    @piings = Piing.featured.find(:all, :limit => 10, :order => "created_at DESC")
   end
 end

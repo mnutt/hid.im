@@ -1,20 +1,20 @@
-class PiingsController < ApplicationController
+class HidimsController < ApplicationController
   def new
-    @piing = Piing.new
+    @hidim = Hidim.new
   end
   
   def create
-    @piing = Piing.create( params[:piing] )
-    redirect_to @piing
+    @hidim = Hidim.create( params[:hidim] )
+    redirect_to @hidim
   end
 
   def show
-    @piing = Piing.find params[:id]
+    @hidim = Hidim.find params[:id]
   end
 
   def index
-    @piing = Piing.new
+    @hidim = Hidim.new
 
-    @piings = Piing.find(:all, :limit => 10, :order => "created_at DESC")
+    @hidims = Hidim.find(:all, :limit => 10, :order => "created_at DESC")
   end
 end

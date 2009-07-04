@@ -1,4 +1,4 @@
-<% form_for @piing, :html => { :multipart => true } do |form| %>
+<% form_for @hidim, :html => { :multipart => true } do |form| %>
   
   <%= submit_tag "Submit" -%>
 
@@ -8,7 +8,7 @@
     $(document).ready(function() {
       $('#select_torrent').fileUpload ({
         'uploader'  : '/flash/uploader.swf',
-        'script'    : '/piings',
+        'script'    : '/hidims',
         'cancelImg' : '/images/cancel.png',
         'auto'      : false,
         'width'     : 498,

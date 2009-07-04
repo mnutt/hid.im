@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class PiingsHelperTest < ActionView::TestCase
+class HidimsHelperTest < ActionView::TestCase
 end

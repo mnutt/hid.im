@@ -2,7 +2,7 @@ require 'png'
 require 'png/reader'
 require 'paperclip_file'
 
-class Piing < ActiveRecord::Base
+class Hidim < ActiveRecord::Base
   has_attached_file :png
   has_attached_file :torrent
 

@@ -1,2 +1,2 @@
-module PiingsHelper
+module HidimsHelper
 end

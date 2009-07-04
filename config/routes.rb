@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :piings
+  map.resources :hidims
 
-  map.root :controller => 'piings', :action => 'index'
+  map.root :controller => 'hidims', :action => 'index'
 end

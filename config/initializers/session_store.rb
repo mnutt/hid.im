@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_piing.cc_session',
+  :key         => '_hidim.cc_session',
   :secret      => '850e41c9bab7f2ab72da9af331fc3dba8fbfbe7a9c17dbaa84ecf6f2ac5c21ffcb5fb3419850b0d2b2b8390898efa0a42c6ac0a477579861d17dc0527bba7be5'
 }
 

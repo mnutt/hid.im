@@ -10,7 +10,7 @@ config/development.sphinx.conf
 config/test.sphinx.conf
 private/*.txt
 public/system/*
-db/*.sqlite3
+db/*.sqlite*
 db/sphinx/*
 .#*
 vendor/sphinx

@@ -1,24 +1,6 @@
 <% form_for @hidim, :html => { :multipart => true } do |form| %>
   
-  <%= submit_tag "Submit" -%>
-
   <%= form.file_field :torrent, :id => 'select_torrent' %>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#select_torrent').fileUpload ({
-        'uploader'  : '/flash/uploader.swf',
-        'script'    : '/hidims',
-        'cancelImg' : '/images/cancel.png',
-        'auto'      : false,
-        'width'     : 498,
-        'height'    : 158,
-        'buttonImg' : '/images/select_button.png',
-        'folder'    : '/uploads',
-        'file_queued_handler' : function() { console.log('hi'); }
-    });
-    });
-</script>
-
-  <!--<%= submit_tag "Submit" -%> -->
+  <%= submit_tag "Submit" -%>
 <% end %>

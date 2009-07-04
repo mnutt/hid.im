@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20090704150028) do
     t.string   "png_content_type"
     t.integer  "png_file_size"
     t.datetime "png_updated_at"
+    t.boolean  "featured"
   end
 
 end

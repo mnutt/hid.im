@@ -1,31 +1,40 @@
 require 'png'
 require 'png/reader'
 require 'paperclip_file'
+require 'digest/sha1'
 
 class Hidim < ActiveRecord::Base
   has_attached_file :png
   has_attached_file :torrent
 
-  before_save :convert_to_png
+  before_create :set_content
+  before_create :convert_to_png
+
+  named_scope :featured, :conditions => {:featured => true}
 
   def name
-    "thingy.torrent"
+    self.torrent_file_name
   end
 
   def hashed
-    "1234567890abcdef"
+    Digest::SHA1.hexdigest(@content) rescue "deadbeefdeadbeefdeadbeefdeadbeebadcoffee"
+  end
+
+  def set_content
+    @content = self.torrent.queued_for_write[:original].read
   end
 
   def convert_to_png
-    content = self.torrent.queued_for_write[:original].read
+    height = 30
     key = "hidim is torrents!".unpack("C*")
-    metadata =  "i#{content.size.to_s}e"
+    metadata =  "i#{height}e"
     metadata += "#{self.name.size.to_s}:#{self.name}"
-    metadata += "#{self.hash.size}:#{self.hash}"
-    decimal = key  + metadata.unpack("C*") + content.unpack("C*")
+    metadata += "#{self.hashed.size}:#{self.hashed}"
+    metadata += "i#{@content.size.to_s}e"
+    puts metadata
+    decimal = key + metadata.unpack("C*") + @content.unpack("C*")
 
     font_width = 5
-    height = 30
     width = decimal.size / 3 / height + 1
 
     canvas = PNG::Canvas.new(width + font_width + 2, height + 2, PNG::Color::Black)

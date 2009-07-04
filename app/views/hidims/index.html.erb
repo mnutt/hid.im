@@ -15,8 +15,11 @@
 <div id="recent">
   <h2>Sample hidim'd torrents</h2>
   <ul>
-    <% @hidims.each do |hidim| -%>
-      <li><%= image_tag hidim.png.url -%></li>
+    <% @piings.each do |piing| -%>
+      <li>
+        <%= image_tag piing.png.url -%>
+        <div><%= piing.torrent_file_name -%></div>
+      </li>
     <% end -%>
   </ul>
 </div>

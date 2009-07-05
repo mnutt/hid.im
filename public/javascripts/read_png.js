@@ -6,16 +6,14 @@ var PngReader = {
     return array;
   },
 
-  inGroupsOf: function(array, length) {
-    if(array.length % length != 0) { /* Firebug.Console.log("bad matrix array"); */ }
-    matrix = [];
-    var i = 0;
-    while(array.length > 0) {
-      matrix.push(array.slice(0, length));
-      array.splice(0, length);
-      i = i + 1;
+  inGroupsOf: function(array, number) {
+    // if(array.length % length != 0) { /* Firebug.Console.log("bad matrix array"); */ }
+    var slices = [];
+    var index = 0;
+    while((index += number) < array.length) {
+      slices.push(array.slice(index, index+number));
     }
-    return matrix;
+    return slices;
   },
 
   containsArray: function(haystack, needle) {
@@ -47,9 +45,9 @@ var PngReader = {
     return transposed;
   },
 
-  toData: function(array) {
+  flatten: function(array) {
     var data = [];
-    for(var i in array) {
+    for(var i = 0; i < array.length; i++) {
       data = data.concat(array[i]);
     }
     return data;
@@ -143,8 +141,8 @@ var PngReader = {
     var transposed = this.transpose(rows);
 
     // Convert the matrix to a data array
-    var torrent = this.toData(this.toData(transposed));
-    console.log(torrent);
+    var torrent = this.flatten(this.flatten(transposed));
+
     // Find the beginning of our data by looking for the key
     var dataStart = this.containsArray(torrent, key);
     if(dataStart) {

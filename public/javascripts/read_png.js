@@ -46,11 +46,16 @@ var PngReader = {
   },
 
   flatten: function(array) {
-    var data = [];
+    var r = [];
     for(var i = 0; i < array.length; i++) {
-      data = data.concat(array[i]);
+      r.push.apply(r,array[i]);
     }
-    return data;
+    return r;
+  },
+
+  /* From prototype */
+  eachSlice: function(array, number, iterator, context) {
+
   },
 
   toChars: function(array) {
@@ -73,7 +78,7 @@ var PngReader = {
     if(String.fromCharCode(data[0]) == 'i') {
       data.shift(); // remove the 'i'
     } else {
-      console.log('could not get metadata at ' + String.fromCharCode(data[0]));
+      // console.log('could not get metadata at ' + String.fromCharCode(data[0]));
     }
 
     metadata = "";
@@ -142,13 +147,13 @@ var PngReader = {
 
     // Convert the matrix to a data array
     var torrent = this.flatten(this.flatten(transposed));
-
+//    console.log(torrent);
     // Find the beginning of our data by looking for the key
     var dataStart = this.containsArray(torrent, key);
     if(dataStart) {
-      console.log("Image contains an embedded torrent.");
+      // console.log("Image contains an embedded torrent.");
     } else {
-      console.log("Image does not contain an embedded torrent.");
+      // console.log("Image does not contain an embedded torrent.");
       return false;
     }
 
@@ -156,7 +161,7 @@ var PngReader = {
     var initialData = torrent.slice(dataStart + key.length);
 
     var lineHeight = this.retrieveInteger(initialData);
-    console.log("line height: " + lineHeight);
+    // console.log("line height: " + lineHeight);
 
     // Adjust the array so that we only read the data inside the data block
     var torrentData = this.adjustForLineHeight(torrent, dataStart, parseInt(lineHeight), img.height);
@@ -166,18 +171,22 @@ var PngReader = {
     torrentData.splice(0, offset);
 
     var torrentFilename = this.retrieveString(torrentData);
-    console.log("torrent filename: " + torrentFilename);
+    // console.log("torrent filename: " + torrentFilename);
 
     var torrentHash = this.retrieveString(torrentData);
-    console.log("torrent sha1: " + torrentHash);
+    // console.log("torrent sha1: " + torrentHash);
 
     var contentLength = this.retrieveInteger(torrentData);
-    console.log("torrent content length: " + contentLength);
+    // console.log("torrent content length: " + contentLength);
 
     var content = this.toChars(torrentData.slice(0, parseInt(contentLength))).join('');
 
-    var computedHash = SHA1.hex_sha1(content + "");
-    console.log("computed sha1: " + computedHash);
+    if(typeof(SHA1) == "undefined") {
+      var computedHash = null;
+    } else {
+      var computedHash = SHA1.hex_sha1(content + "");
+    }
+    // console.log("computed sha1: " + computedHash);
 
     var result = {
       file: {
@@ -192,4 +201,4 @@ var PngReader = {
 
     return result;
   }
-}
+};

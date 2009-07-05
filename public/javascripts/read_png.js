@@ -178,7 +178,7 @@ var PngReader = {
 
     var content = this.toChars(torrentData.slice(0, parseInt(contentLength))).join('');
 
-    var computedHash = hex_sha1(content + "");
+    var computedHash = SHA1.hex_sha1(content + "");
     console.log("computed sha1: " + computedHash);
 
     var result = {

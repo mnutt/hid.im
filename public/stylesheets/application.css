@@ -1,9 +1,8 @@
 body {
   background: #2e2929 url('../images/repeat.png') top left repeat-y;
   margin: 0;
-  color: #FFF;
-  font-family: Helvetica, sans-serif;
-  color: #ddd;
+  font-family: "Droid Sans", Helvetica, sans-serif;
+  color: #eee;
 }
 #recent ul li {
   list-style: none;
@@ -28,8 +27,13 @@ ul li div {
   margin-bottom: 1em;
 }
 #content {
-  margin-left: 250px;
+  margin: 35px 20px 20px 260px;
 }
+
+.section {
+  margin-bottom: 2em;
+}
+
 h2 {
   color: #AAA;
   font-weight: bold;
@@ -38,4 +42,113 @@ h2 {
 }
 p {
   font-size: 0.9em;
+  line-height: 1.3em;
+}
+#create_wrapper, #extension_wrapper {
+  width: 50%;
+  float: left;
+  min-width: 328px;
+}
+
+#create, #extension {
+  color: #222;
+  padding: 15px;
+  min-height: 6em;
+  background: #A1C460 url(../images/make_bg.png) top left repeat-x;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-box-shadow: 0px 2px 2px #0A0A0A;
+  -webkit-box-shadow: 0px 1px 1px #0A0A0A;
+}
+
+#create a, #extension a {
+  color: #000;
+  background: transparent;
+}
+
+#create:hover, #extension:hover {
+}
+
+/* Show buttons full-width if the screen size is small */
+@media all and (max-width: 950px) {
+  #create, #extension {
+    margin: 0 0 1em 0 !important;
+  }
+  #create_wrapper, #extension_wrapper {
+    width: 100%;
+  }
+}
+
+#create {
+  margin-right: 10px;
+}
+#create form {
+  margin: 0;
+}
+
+#extension {
+  margin-left: 10px;
+}
+
+#extension p {
+  margin-bottom: 0;
+}
+
+#create h2, #extension h2 {
+  color: #222;
+  margin-top: 0;
+  text-shadow: #CCC 0 1px 0;
+}
+#recent {
+  clear: both;
+}
+
+.github-icon {
+  float: left;
+}
+
+#github-projects {
+  padding-top: 25px;
+  margin-left: 130px;
+}
+
+#github-projects div.project {
+  font-weight: bold;
+  font-size: 1.6em;
+  color: #FFF;
+  line-height: 1.6em;
+}
+
+img.icon {
+  border: 0;
+  margin: 0 -1px -3px 0;
+}
+
+a {
+  color: #FFF;
+  background: #000;
+  padding: 2px 2px 1px 2px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+@font-face {
+	font-family: Delicious;
+	src: url('/fonts/Delicious-Roman.otf');
+}
+
+@font-face {
+	font-family: Delicious;
+	font-weight: bold;
+	src: url('/fonts/Delicious-Bold.otf');
+}
+
+@font-face {
+  font-family: "Droid Sans";
+  src: url('/fonts/DroidSans.ttf');
+}
+@font-face {
+  font-family: "Droid Sans";
+  font-weight: bold;
+  src: url('/fonts/DroidSans-Bold.ttf');
 }

@@ -1,5 +1,7 @@
 <% form_for @hidim, :html => { :multipart => true } do |form| %>
   
+  <p>hid.im only accepts .torrent files smaller than 250KB</p>
+
   <%= form.file_field :torrent, :id => 'select_torrent' %>
 
   <%= submit_tag "Submit" -%>

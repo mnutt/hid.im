@@ -15,6 +15,6 @@ class HidimsController < ApplicationController
   def index
     @hidim = Hidim.new
 
-    @hidims = Hidim.find(:all, :limit => 10, :order => "created_at DESC")
+    @hidims = Hidim.featured.find(:all, :limit => 10, :order => "created_at DESC")
   end
 end

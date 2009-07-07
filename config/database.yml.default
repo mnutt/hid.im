@@ -1,0 +1,11 @@
+development:
+  adapter: sqlite3
+  dbfile: db/hidim.sqlite
+
+production:
+  adapter: mysql
+  database: hidim
+  username: hidimuser
+  password:
+  hostname: localhost
+  encoding: utf8

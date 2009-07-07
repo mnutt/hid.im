@@ -8,6 +8,7 @@ doc/app
 config/database.yml
 config/development.sphinx.conf
 config/test.sphinx.conf
+config/tracker.html
 private/*.txt
 public/system/*
 db/*.sqlite*

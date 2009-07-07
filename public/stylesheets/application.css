@@ -1,3 +1,11 @@
+html, body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+}
+
 body {
   background: #2e2929 url('../images/repeat.png') top left repeat-y;
   margin: 0;
@@ -22,12 +30,19 @@ h1 {
   top: 0;
   left: 0;
 }
-ul li div {
+.hidim-item div {
   font-size: 0.8em;
   margin-bottom: 1em;
 }
 #content {
-  margin: 35px 20px 20px 260px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 20px -60px 260px;
+}
+
+h2.first {
+  padding-top: 2em;
 }
 
 .section {
@@ -39,6 +54,7 @@ h2 {
   font-weight: bold;
   font-size: 1.1em;
   text-shadow: #222 0 1px 0;
+  margin-bottom: 0.5em;
 }
 p {
   font-size: 0.9em;
@@ -53,7 +69,7 @@ p {
 #create, #extension {
   color: #222;
   padding: 15px;
-  min-height: 6em;
+  min-height: 5em;
   background: #A1C460 url(../images/make_bg.png) top left repeat-x;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -64,9 +80,6 @@ p {
 #create a, #extension a {
   color: #000;
   background: transparent;
-}
-
-#create:hover, #extension:hover {
 }
 
 /* Show buttons full-width if the screen size is small */
@@ -94,11 +107,29 @@ p {
   margin-bottom: 0;
 }
 
+#extension .screenshot-thumb {
+  float: right;
+  margin-top: -5px;
+  margin-left: 5px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
 #create h2, #extension h2 {
   color: #222;
   margin-top: 0;
   text-shadow: #CCC 0 1px 0;
 }
+
+#notice {
+  clear: both;
+  padding: 10px;
+  background-color: #000;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin-bottom: 2em;
+}
+
 #recent {
   clear: both;
 }
@@ -112,6 +143,28 @@ p {
   margin-left: 130px;
 }
 
+#footer, .push {
+  height: 60px;
+}
+
+.push {
+  padding-bottom: 20px;
+}
+
+#footer {
+  position: relative;
+  background-color: #000;
+}
+
+#footer a {
+  background-color: #333;
+}
+
+#footer p {
+  padding: 20px 15px;
+  margin: 0;
+}
+
 #github-projects div.project {
   font-weight: bold;
   font-size: 1.6em;
@@ -122,6 +175,10 @@ p {
 img.icon {
   border: 0;
   margin: 0 -1px -3px 0;
+}
+
+p {
+  margin-bottom: 0.4em;
 }
 
 a {
@@ -151,4 +208,8 @@ a {
   font-family: "Droid Sans";
   font-weight: bold;
   src: url('/fonts/DroidSans-Bold.ttf');
+}
+img { behavior: url(/iepngfix.htc) }
+a img {
+  border: 0;
 }

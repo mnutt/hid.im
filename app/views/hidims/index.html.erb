@@ -1,5 +1,5 @@
 <div class="section" id="intro">
-  <h2>Hidims embed torrents in images</h2>
+  <h2 class="first">Hidims embed torrents in images</h2>
   <p>
     A Hidim turns a torrent into a regular PNG image that can be saved and posted anywhere that images 
     can be posted.  It can even be pasted into another image such as a personal sig as long as the 
@@ -13,11 +13,15 @@
     <%= render :partial => 'form' -%>
   </div>
 </div>
+
 <div id="extension_wrapper">
   <div id="extension" class="section">
+    <a class="screenshot-thumb" rel="lightbox" href="/firefox-extension/screenshot-1.png">
+      <img src="/firefox-extension/screenshot-1.thumb.png"/>
+    </a>
     <h2>Decode a hidim</h2>
     <p>
-      <a href="#">
+      <a href="https://addons.mozilla.org/en-US/firefox/addon/12858/">
 	<img class="icon" src="/images/firefox-16.png"> 
 	Get the Firefox extension from addons.mozilla.org
       </a>
@@ -28,13 +32,22 @@
   </div>
 </div>
 
+<% unless flash[:notice].blank? -%>
+  <div id="notice">
+    <% if Array === flash[:notice] -%>
+      <%= flash[:notice].map{|line| "<p>#{line}</p>"} -%>
+    <% else -%>
+      <%= flash[:notice] -%>
+    <% end -%>
+  </div>
+<% end -%>
+
 <div class="section" id="recent">
   <h2>Sample hidim'd torrents</h2>
   <ul>
     <% @hidims.first(3).each do |hidim| -%>
-      <li>
-        <%= image_tag hidim.png.url -%>
-        <div><%= hidim.torrent_file_name.gsub(/_/, ' ') -%></div>
+      <li class="hidim-item">
+	<%= render :partial => 'hidim', :object => hidim -%>
       </li>
     <% end -%>
   </ul>
@@ -44,9 +57,9 @@
   <h2>Open Source</h2>
   <p>
     Hidim is still in its infancy and it could use your help!  You can help by trying it out, 
-    <a href="http://github.com/mnutt/hid.im-firefox/issues">finding and reporting bugs</a>, and 
-    <a href="http://github.com/mnutt/hid.im-firefox">hacking on the source</a> / creating 
-    implementations in other languages. Hidim is licensed under the <a href="#">MIT License</a>.
+    <a href="http://github.com/mnutt/hid.im-firefox/issues">finding and reporting bugs</a>, 
+    <a href="http://github.com/mnutt/hid.im-firefox">hacking on the source</a> or creating 
+    implementations in other languages. Hidim is licensed under the <a href="http://github.com/mnutt/hid.im-firefox/raw/4cdb119fe6233674dc3f1e31f9f17ea94445107a/LICENSE">MIT License</a>.
   </p>
 
   <img src="/images/github.png" class="github-icon" alt="Github"/>

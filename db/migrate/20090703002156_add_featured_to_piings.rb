@@ -1,9 +1,9 @@
 class AddFeaturedToPiings < ActiveRecord::Migration
   def self.up
-    add_column :hidims, :featured, :boolean
+    add_column :piings, :featured, :boolean
   end
 
   def self.down
-    remove_column :hidims, :featured
+    remove_column :piings, :featured
   end
 end

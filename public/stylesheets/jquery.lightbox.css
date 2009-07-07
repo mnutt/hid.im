@@ -154,10 +154,8 @@ html, body { margin: 0; padding: 0; height: 100%;}
 }
 /*
 .preload_largeLink, #prevLink:hover, #prevLink:visited:hover {
-	background:url("../images/prev.gif") left 45% no-repeat;
 }
 .preload_nextLink, #nextLink:hover, #nextLink:visited:hover {
-	background:url("../images/next.gif") right 45% no-repeat;
 }
 */
 

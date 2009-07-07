@@ -499,10 +499,10 @@
 				}
 			},
 			images: {
-				prev:		'images/prev.gif',
-				next:		'images/next.gif',
+				prev:		'',
+				next:		'',
 				blank:		'images/blank.gif',
-				loading:	'images/loading.gif'
+				loading:	''
 			}
 		},
 

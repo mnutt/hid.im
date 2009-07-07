@@ -9,6 +9,7 @@ config/database.yml
 config/development.sphinx.conf
 config/test.sphinx.conf
 config/tracker.html
+config/encryption_key
 private/*.txt
 public/system/*
 db/*.sqlite*

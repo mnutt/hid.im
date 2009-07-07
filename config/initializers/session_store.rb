@@ -4,9 +4,14 @@
 # If you change this key, all old sessions will become invalid!
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
+ENCRYPTION_FILE = "#{RAILS_ROOT}/config/encryption_key"
+
+# Change this!
+DEFAULT_ENCRYPTION_KEY =  '850e41c9bab7f2ab72da9af331fc3dba8fbfbe7a9c17dbaa84ecf6f2ac5c21ffcb5fb3419850b0d2b2b8390898efa0a42c6ac0a477579861d17dc0527bba7be5'
+
 ActionController::Base.session = {
   :key         => '_hidim.cc_session',
-  :secret      => '850e41c9bab7f2ab72da9af331fc3dba8fbfbe7a9c17dbaa84ecf6f2ac5c21ffcb5fb3419850b0d2b2b8390898efa0a42c6ac0a477579861d17dc0527bba7be5'
+  :secret      => File.exist?(ENCRYPTION_FILE) ? File.read(ENCRYPTION_FILE) : DEFAULT_ENCRYPTION_KEY
 }
 
 # Use the database for sessions instead of the cookie-based default,

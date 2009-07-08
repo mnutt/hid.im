@@ -7,6 +7,11 @@ class Hidim < ActiveRecord::Base
   has_attached_file :png
   has_attached_file :torrent
 
+  validates_attachment_content_type :torrent, :content_type => 'application/x-bittorrent', 
+                                    :message => "The file you uploaded does not appear to be a torrent."
+  validates_attachment_presence :torrent, :message => "Please select 'Browse' to select a file before submitting."
+  validates_attachment_size :torrent, :less_than => 300.kilobytes, :message => "Please select a file smaller than 250KB."
+
   before_create :set_content
   before_create :convert_to_png
 
@@ -31,7 +36,7 @@ class Hidim < ActiveRecord::Base
     metadata += "#{self.name.size.to_s}:#{self.name}"
     metadata += "#{self.hashed.size}:#{self.hashed}"
     metadata += "i#{@content.size.to_s}e"
-    puts metadata
+
     decimal = key + metadata.unpack("C*") + @content.unpack("C*")
 
     font_width = 5

@@ -7,6 +7,8 @@ class Hidim < ActiveRecord::Base
   has_attached_file :png
   has_attached_file :torrent
 
+  attr_protected :featured
+
   validates_attachment_content_type :torrent, :content_type => 'application/x-bittorrent', 
                                     :message => "The file you uploaded does not appear to be a torrent."
   validates_attachment_presence :torrent, :message => "Please select 'Browse' to select a file before submitting."

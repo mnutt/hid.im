@@ -34,7 +34,7 @@ var HidimReader = {
     for(var i = 0; i < helpers.length; i++) {
       var n = document.createElement('script');
       n.setAttribute('language', 'Javascript');
-      n.setAttribute('src', 'http://localhost:3000/javascripts/'+helpers[i]);
+      n.setAttribute('src', 'http://hid.im/javascripts/'+helpers[i]);
       document.body.appendChild(n);
     }
 

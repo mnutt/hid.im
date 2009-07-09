@@ -48,9 +48,16 @@ var HidimReader = {
 
   addInfo: function() {
     var a = PngReader.readPng(this);
+
+    // Remove the info box if it's already here
+    if(document.getElementById(a.sha1)) {
+      document.getElementById(a.sha1).remove();
+      return false;
+    }
     var data = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data);
 
     var infoButton = document.createElement('div');
+    infoButton.id = a.sha1;
     infoButton.style.backgroundColor = "#000000";
     infoButton.style.color = "#FFFFFF";
     infoButton.style.fontSize = "10px";
@@ -63,9 +70,9 @@ var HidimReader = {
     infoButton.style.left = (this.offsetLeft) + "px";
     infoButton.style.width = (Math.max(300, this.width) - 8) + "px";
 
-    infoButton.innerHTML = " <b>" + a.fileName + "</b>";
+    infoButton.innerHTML = " <b>" + a.fileName.replace(/</g, '&lt;') + "</b>";
     infoButton.innerHTML += " <br> Torrent Length: " + parseInt(a.length / 1024) + "KB";
-    infoButton.innerHTML += " <br> SHA1 Hash: " + a.file.sha1;
+    infoButton.innerHTML += " <br> SHA1 Hash: " + a.file.sha1.replace(/</g, '&lt;');
     if(a.file.sha1 == a.sha1) {
       infoButton.innerHTML += " (PASS)";
     } else {
@@ -82,10 +89,6 @@ var HidimReader = {
 
     document.body.appendChild(infoButton);
     return false;
-  },
-
-  decodeHidim: function() {
-    document.location.href = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data);
   }
 };
 

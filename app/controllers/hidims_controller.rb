@@ -6,7 +6,7 @@ class HidimsController < ApplicationController
   def create
     @hidim = Hidim.new( params[:hidim] )
     if @hidim.save
-      redirect_to @hidim
+      redirect_to hidim_url(@hidim.token)
     else
       flash[:notice] = @hidim.errors[:torrent]
       redirect_to "/"
@@ -14,7 +14,7 @@ class HidimsController < ApplicationController
   end
 
   def show
-    @hidim = Hidim.find params[:id]
+    @hidim = Hidim.find_by_token(params[:id]) or raise ActiveRecord::RecordNotFound
   end
 
   def index

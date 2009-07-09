@@ -69,7 +69,7 @@ p {
 #create, #extension {
   color: #222;
   padding: 15px;
-  min-height: 5em;
+  min-height: 5.5em;
   background: #A1C460 url(../images/make_bg.png) top left repeat-x;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;

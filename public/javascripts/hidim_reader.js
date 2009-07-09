@@ -25,12 +25,12 @@ var HidimReader = {
     helpBox.appendChild(titleLabel);
     helpBox.innerHTML += "Click on a hidim on this page to download it.  ";
     helpBox.innerHTML += "Refresh the page to close the Hidim Decoder.  ";
-    helpBox.innerHTML += "<b>Safari 4</b>: File downloads automatically. <br> <b>Firefox 3</b>: File dialog appears; open with torrent app. <br> <b>Chrome</b>: Currently not working.";
+    helpBox.innerHTML += "<b>Safari 4</b>: File downloads automatically as DownloadedFile. <br> <b>Firefox 3</b>: File dialog appears; open with torrent app. <br> <b>Chrome</b>: Currently not working.";
 
     document.body.appendChild(helpBox);
 
     // Initialize helper scripts
-    var helpers = ["sha1.js", "base64.js", "read_png.js"];
+    var helpers = ["sha1.js", "base64.js", "bdecode.js", "read_png.js"];
     for(var i = 0; i < helpers.length; i++) {
       var n = document.createElement('script');
       n.setAttribute('language', 'Javascript');
@@ -43,6 +43,7 @@ var HidimReader = {
     for(var i = 0; i < images.length; i++) {
       var image = images[i];
       image.addEventListener('click', this.addInfo, false);
+      image.addEventListener('mouseover', function() {this.style.cursor = "pointer";}, false);
     }
   },
 
@@ -57,18 +58,21 @@ var HidimReader = {
     var data = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data);
 
     var infoButton = document.createElement('div');
-    infoButton.id = a.sha1;
     infoButton.style.backgroundColor = "#000000";
     infoButton.style.color = "#FFFFFF";
     infoButton.style.fontSize = "10px";
     infoButton.style.fontFamily = '"Droid Sans", Helvetica, sans-serif;';
     infoButton.style.padding = "4px";
+    infoButton.style.borderTop = "2px solid #222";
     infoButton.style.position = "absolute";
     infoButton.style.display = "block";
     infoButton.style.visibility = "normal";
     infoButton.style.top = (this.offsetTop + this.height) + "px";
     infoButton.style.left = (this.offsetLeft) + "px";
     infoButton.style.width = (Math.max(300, this.width) - 8) + "px";
+
+    infoButton.id = a.sha1;
+    document.body.appendChild(infoButton);
 
     infoButton.innerHTML = " <b>" + a.fileName.replace(/</g, '&lt;') + "</b>";
     infoButton.innerHTML += " <br> Torrent Length: " + parseInt(a.length / 1024) + "KB";
@@ -87,7 +91,6 @@ var HidimReader = {
     downloadLink.innerHTML = "download";
     infoButton.appendChild(downloadLink);
 
-    document.body.appendChild(infoButton);
     return false;
   }
 };

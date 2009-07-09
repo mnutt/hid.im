@@ -21,6 +21,13 @@ class Hidim < ActiveRecord::Base
   before_create :convert_to_png
 
   named_scope :featured, :conditions => {:featured => true}
+  named_scope :not_featured, :conditions => {:featured => nil}
+
+  named_scope :stale, lambda { { :conditions => ['created_at < ?', 5.minutes.ago] } }
+
+  def self.clear_stale
+    Hidim.not_featured.stale.destroy_all
+  end
 
   def generate_token
     self.token = rand(36**8).to_s(36) if self.new_record? and self.token.nil?

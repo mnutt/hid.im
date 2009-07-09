@@ -1,0 +1,1 @@
+*/5 * * * * /var/www/hid.im/script/runner -e production 'Hidim.clear_stale; Rails.logger.flush'

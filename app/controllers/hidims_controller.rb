@@ -1,4 +1,6 @@
 class HidimsController < ApplicationController
+  caches_page :index
+
   def new
     @hidim = Hidim.new
   end

@@ -189,6 +189,11 @@ a {
   -webkit-border-radius: 3px;
 }
 
+a.bookmarklet {
+  background-color: #CCC !important;
+  border: 1px solid #AAA;
+}
+
 @font-face {
 	font-family: Delicious;
 	src: url('/fonts/Delicious-Roman.otf');

@@ -6,12 +6,15 @@ var PngReader = {
     return array;
   },
 
-  inGroupsOf: function(array, number) {
-    // if(array.length % length != 0) { /* Firebug.Console.log("bad matrix array"); */ }
+  inGroupsOf: function(arr, number) {
+    if(typeof(arr.slice) == "undefined") {
+      arr.slice = Array.prototype.slice;
+    }
+
     var slices = [];
-    var index = 0;
-    while((index += number) < array.length) {
-      slices.push(array.slice(index, index+number));
+    var index = -number;
+    while((index += number) < arr.length) {
+      slices.push(arr.slice(index, index+number));
     }
     return slices;
   },
@@ -53,11 +56,6 @@ var PngReader = {
     return r;
   },
 
-  /* From prototype */
-  eachSlice: function(array, number, iterator, context) {
-
-  },
-
   toChars: function(array) {
     charArray = [];
     for(var i in array) {
@@ -78,7 +76,7 @@ var PngReader = {
     if(String.fromCharCode(data[0]) == 'i') {
       data.shift(); // remove the 'i'
     } else {
-      // console.log('could not get metadata at ' + String.fromCharCode(data[0]));
+      // Firebug.Console.log('could not get metadata at ' + this.toChars(data.slice(0, 10)).join(''));
     }
 
     metadata = "";
@@ -118,11 +116,10 @@ var PngReader = {
     return output;
   },
 
-  readPng: function(img) {
+  extractFromImg: function(img) {
     var canvas = document.getElementById('tmpCanvas');
     if(!canvas) {
       canvas = document.createElement('canvas');
-      canvas.style.display = "none";
     }
     var context = canvas.getContext('2d');
 
@@ -130,8 +127,11 @@ var PngReader = {
     canvas.height = img.height;
     context.drawImage(img, 0, 0);
 
-    var key = [104, 105, 100, 105, 109, 32, 105, 115, 32, 116, 111, 114, 114, 101, 110, 116, 115, 33];
-    var data = context.getImageData(0, 0, img.width, img.height).data;
+    return context.getImageData(0, 0, img.width, img.height).data;
+  },
+
+  debugTable: function(img, container) {
+    var data = this.extractFromImg(img);
 
     // Split the raw data into pixels (r, g, b, a)
     var pixels = this.inGroupsOf(data, 4);
@@ -145,15 +145,52 @@ var PngReader = {
     // Since we're scanning vertically instead of horizontally we need to transpose
     var transposed = this.transpose(rows);
 
-    // Convert the matrix to a data array
+    var table = document.createElement('table');
+
+    for(var i = 0; i < transposed.length; i++) {
+      var row = transposed[i];
+      var tr = document.createElement('tr');
+      for(var j = 0; j < row.length; j++) {
+	var pixel = row[j];
+	var color = "rgb("+ pixel.join(', ') + ")";
+	for(var k = 0; k < pixel.length; k++) {
+	  var td = document.createElement('td');
+	  td.innerHTML = pixel[k];
+	  tr.appendChild(td);
+	  td.style.backgroundColor = color;
+	}
+      }
+      table.appendChild(tr);
+    }
+
+    container.appendChild(table);
+  },
+
+  readPng: function(img) {
+    var key = [104, 105, 100, 105, 109, 32, 105, 115, 32, 116, 111, 114, 114, 101, 110, 116, 115, 33];
+    var data = this.extractFromImg(img);
+
+    // Split the raw data into pixels (r, g, b, a)
+    var pixels = this.inGroupsOf(data, 4);
+
+    // Alpha is always set to fully opaque; we're not using it to store data so remove the alpha byte
+    pixels = this.removeTransparency(pixels);
+
+    // Group the pixel data into a matrix of rows, and reverse them since we are going to be reading upwards
+    var rows = this.inGroupsOf(pixels, img.width).reverse();
+
+    // Since we're scanning vertically instead of horizontally we need to transpose
+    var transposed = this.transpose(rows);
+
+    // Convert the matrix to a 1-dimensional array
     var torrent = this.flatten(this.flatten(transposed));
-//    console.log(torrent);
+
     // Find the beginning of our data by looking for the key
     var dataStart = this.containsArray(torrent, key);
     if(dataStart) {
-      // console.log("Image contains an embedded torrent.");
+      // Firebug.Console.log("Image contains an embedded torrent.");
     } else {
-      // console.log("Image does not contain an embedded torrent.");
+      // Firebug.Console.log("Image does not contain an embedded torrent.");
       return false;
     }
 
@@ -161,7 +198,7 @@ var PngReader = {
     var initialData = torrent.slice(dataStart + key.length);
 
     var lineHeight = this.retrieveInteger(initialData);
-    // console.log("line height: " + lineHeight);
+    // Firebug.Console.log("line height: " + lineHeight);
 
     // Adjust the array so that we only read the data inside the data block
     var torrentData = this.adjustForLineHeight(torrent, dataStart, parseInt(lineHeight), img.height);
@@ -171,13 +208,14 @@ var PngReader = {
     torrentData.splice(0, offset);
 
     var torrentFilename = this.retrieveString(torrentData);
-    // console.log("torrent filename: " + torrentFilename);
+    // Firebug.Console.log("torrent filename: " + torrentFilename);
+    // Firebug.Console.log(this.toChars(torrentData.slice(0, 50)).join(''));
 
     var torrentHash = this.retrieveString(torrentData);
-    // console.log("torrent sha1: " + torrentHash);
+    // Firebug.Console.log("torrent sha1: " + torrentHash);
 
     var contentLength = this.retrieveInteger(torrentData);
-    // console.log("torrent content length: " + contentLength);
+    // Firebug.Console.log("torrent content length: " + contentLength);
 
     var content = this.toChars(torrentData.slice(0, parseInt(contentLength))).join('');
 
@@ -186,7 +224,7 @@ var PngReader = {
     } else {
       var computedHash = SHA1.hex_sha1(content + "");
     }
-    // console.log("computed sha1: " + computedHash);
+    // Firebug.Console.log("computed sha1: " + computedHash);
 
     var result = {
       file: {

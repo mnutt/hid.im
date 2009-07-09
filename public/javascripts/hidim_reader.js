@@ -51,7 +51,7 @@ var HidimReader = {
 
     // Remove the info box if it's already here
     if(document.getElementById(a.sha1)) {
-      document.getElementById(a.sha1).remove();
+      document.body.removeChild(document.getElementById(a.sha1));
       return false;
     }
     var data = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data);

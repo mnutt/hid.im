@@ -20,9 +20,15 @@ describe Hidim do
       @hidim.png.should_not be_nil
     end
 
-    it "should not allow :featured to be set" do
-      @hidim = Hidim.create!(@valid_attributes.merge(:featured => true))
+    it "should have a token" do
+      @hidim = Hidim.create!(@valid_attributes)
+      @hidim.token.size.should == 8
+    end
+
+    it "should not allow attributes to be set" do
+      @hidim = Hidim.create!(@valid_attributes.merge(:featured => true, :token => "foo"))
       @hidim.featured.should_not be_true
+      @hidim.token.should_not == "foo"
     end
   end
 

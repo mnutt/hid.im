@@ -7,17 +7,28 @@ class Hidim < ActiveRecord::Base
   has_attached_file :png
   has_attached_file :torrent
 
-  attr_protected :featured
+  attr_accessible :torrent
 
   validates_attachment_content_type :torrent, :content_type => ['application/x-bittorrent', 'application/x-torrent'],
                                     :message => "The file you uploaded does not appear to be a torrent."
   validates_attachment_presence :torrent, :message => "Please select 'Browse' to select a file before submitting."
   validates_attachment_size :torrent, :less_than => 300.kilobytes, :message => "Please select a file smaller than 250KB."
+  validates_presence_of :token
+  validates_uniqueness_of :token
 
+  before_validation_on_create :generate_token
   before_create :set_content
   before_create :convert_to_png
 
   named_scope :featured, :conditions => {:featured => true}
+
+  def generate_token
+    self.token = rand(36**8).to_s(36) if self.new_record? and self.token.nil?
+  end
+
+  def to_yaml
+    self.token
+  end
 
   def name
     self.torrent_file_name

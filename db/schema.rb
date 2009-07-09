@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090704150028) do
+ActiveRecord::Schema.define(:version => 20090709011003) do
 
   create_table "hidims", :force => true do |t|
     t.datetime "created_at"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20090704150028) do
     t.integer  "png_file_size"
     t.datetime "png_updated_at"
     t.boolean  "featured"
+    t.string   "token"
   end
+
+  add_index "hidims", ["token"], :name => "index_hidims_on_token"
 
 end

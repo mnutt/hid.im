@@ -25,7 +25,7 @@ var HidimReader = {
     helpBox.appendChild(titleLabel);
     helpBox.innerHTML += "Click on a hidim on this page to download it.  ";
     helpBox.innerHTML += "Refresh the page to close the Hidim Decoder.  ";
-    helpBox.innerHTML += "<b>Safari 4</b>: File downloads automatically. <br> <b>Firefox 3</b>: File dialog appears; choose torrent app. <br> <b>Chrome</b>: Currently not working.";
+    helpBox.innerHTML += "<b>Safari 4</b>: File downloads automatically. <br> <b>Firefox 3</b>: File dialog appears; open with torrent app. <br> <b>Chrome</b>: Currently not working.";
 
     document.body.appendChild(helpBox);
 

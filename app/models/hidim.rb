@@ -9,7 +9,7 @@ class Hidim < ActiveRecord::Base
 
   attr_protected :featured
 
-  validates_attachment_content_type :torrent, :content_type => 'application/x-bittorrent', 
+  validates_attachment_content_type :torrent, :content_type => ['application/x-bittorrent', 'application/x-torrent'],
                                     :message => "The file you uploaded does not appear to be a torrent."
   validates_attachment_presence :torrent, :message => "Please select 'Browse' to select a file before submitting."
   validates_attachment_size :torrent, :less_than => 300.kilobytes, :message => "Please select a file smaller than 250KB."

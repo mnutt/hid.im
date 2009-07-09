@@ -46,4 +46,12 @@ describe Hidim do
       @hidim.errors[:torrent].should =~ /does not appear to be a torrent/
     end
   end
+
+  describe "no torrent" do
+    it "should not allow a hidim to be created without a torrent" do
+      @hidim = Hidim.new
+      @hidim.save.should be_false
+      @hidim.errors[:torrent].should =~ /select a file/
+    end
+  end
 end

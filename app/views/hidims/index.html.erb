@@ -41,6 +41,7 @@
   </div>
 <% end -%>
 
+
 <div class="section" id="recent">
   <h2>Sample hidim'd torrents</h2>
   <ul>
@@ -51,6 +52,11 @@
     <% end -%>
   </ul>
 </div>
+
+<p>Read more about how hidims work:
+  <%= link_to "The Bookmarklet", about_url(:action => 'bookmarklet') -%>,
+  <%= link_to "Hidim Format", about_url(:action => 'format') -%>
+</p>
 
 <div class="section" id="opensource">
   <h2>Open Source</h2>

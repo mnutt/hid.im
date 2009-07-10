@@ -15,7 +15,7 @@ green, and blue channels in a pixel.</p>
 
 <p>Each hidim is identified by the hidim key:</p>
 
-<p style="clear: both"><code>[104, 105, 100, 105, 109, 32, 105, 115, 32, 116, 111, 114, 114, 101, 110, 116, 115, 33]</code></p>
+<p style="clear: both"><pre class="sh_javascript">[104, 105, 100, 105, 109, 32, 105, 115, 32, 116, 111, 114, 114, 101, 110, 116, 115, 33]</pre></p>
 
 <p>This byte array identifies the image as a hidim and marks the start of hidim data.  
 The hidim reader starts at the hidim key, reads the metadata to determine the column 
@@ -33,7 +33,7 @@ has been reached.</p>
 </ol>
 
 <p>Example metadata:</p>
-<code>i30e14:ubuntu.torrent40:f572d396fae9206628714fb2ce00f72e94f2258f30592:d8:anno...</code>
+<pre class="sh_sourceCode"><span class="sh_keyword">i30e</span><span class="sh_type">14:ubuntu.torrent</span><span class="sh_string">40:f572d396fae9206628714fb2ce00f72e94f2258f</span><span class="sh_function">30592:d8:anno...</span></pre>
 
 <p>Metadata is stacked together without separators.</p>
 

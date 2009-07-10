@@ -1,0 +1,77 @@
+pre.sh_sourceCode, code {
+  display: block;
+  background-color: #000;
+  color: #FFF;
+  font-style: normal;
+  font-weight: normal;
+  margin: 1em 0;
+  padding: 8px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-family: "Consolas", "Monaco", "Courier New", Courier, mono;
+  overflow: hidden;
+}
+
+pre.sh_sourceCode:hover, code:hover {
+  overflow-x: auto;
+}
+
+pre.sh_sourceCode .sh_keyword { color: #FF6458; }           /* language keywords */
+pre.sh_sourceCode .sh_type { color: #0A9CFF; }                            /* basic types */
+pre.sh_sourceCode .sh_usertype { color: #0A9CFF; }                             /* user defined types */
+pre.sh_sourceCode .sh_string { color: #90FF5E; }        /* strings and chars */
+pre.sh_sourceCode .sh_regexp { color: #90FF5E; }     /* regular expressions */
+pre.sh_sourceCode .sh_specialchar { color: pink; }  /* e.g., \n, \t, \\ */
+pre.sh_sourceCode .sh_comment { color: #C05DFF; }         /* comments */
+pre.sh_sourceCode .sh_number { color: #99CF50; }                             /* literal numbers */
+pre.sh_sourceCode .sh_preproc { color: darkblue; }       /* e.g., #include, import */
+pre.sh_sourceCode .sh_symbol { color: white; }                            /* e.g., <, >, + */
+pre.sh_sourceCode .sh_function { color: #83CBED; }         /* function calls and declarations */
+pre.sh_sourceCode .sh_cbracket { color: white; }                              /* block brackets (e.g., {, }) */
+pre.sh_sourceCode .sh_todo { font-weight: bold; background-color: cyan; }   /* TODO and FIXME */
+
+/* Predefined variables and functions (for instance glsl) */
+pre.sh_sourceCode .sh_predef_var { color: darkblue; }
+pre.sh_sourceCode .sh_predef_func { color: darkblue; font-weight: bold; }
+
+/* for OOP */
+pre.sh_sourceCode .sh_classname { color: teal; }
+
+/* line numbers (not yet implemented) */
+pre.sh_sourceCode .sh_linenum { color: white; font-family: monospace; }
+
+/* Internet related */
+pre.sh_sourceCode .sh_url { color: blue; text-decoration: underline; font-family: monospace; }
+
+/* for ChangeLog and Log files */
+pre.sh_sourceCode .sh_date { color: blue; font-weight: bold; }
+pre.sh_sourceCode .sh_time, pre.sh_sourceCode .sh_file { color: darkblue; font-weight: bold; }
+pre.sh_sourceCode .sh_ip, pre.sh_sourceCode .sh_name { color: darkgreen; }
+
+/* for Prolog, Perl... */
+pre.sh_sourceCode .sh_variable { color: darkgreen; }
+
+/* for LaTeX */
+pre.sh_sourceCode .sh_italics { color: darkgreen; font-style: italic; }
+pre.sh_sourceCode .sh_bold { color: darkgreen; font-weight: bold; }
+pre.sh_sourceCode .sh_underline { color: darkgreen; text-decoration: underline; }
+pre.sh_sourceCode .sh_fixed { color: green; font-family: monospace; }
+pre.sh_sourceCode .sh_argument { color: darkgreen; }
+pre.sh_sourceCode .sh_optionalargument { color: purple; }
+pre.sh_sourceCode .sh_math { color: orange; }
+pre.sh_sourceCode .sh_bibtex { color: blue; }
+
+/* for diffs */
+pre.sh_sourceCode .sh_oldfile { color: orange; }
+pre.sh_sourceCode .sh_newfile { color: darkgreen; }
+pre.sh_sourceCode .sh_difflines { color: blue; }
+
+/* for css */
+pre.sh_sourceCode .sh_selector { color: purple; }
+pre.sh_sourceCode .sh_property { color: blue; }
+pre.sh_sourceCode .sh_value { color: darkgreen; font-style: italic; }
+
+/* other */
+pre.sh_sourceCode .sh_section { color: black; font-weight: bold; }
+pre.sh_sourceCode .sh_paren { color: red; }
+pre.sh_sourceCode .sh_attribute { color: darkgreen; }

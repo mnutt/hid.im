@@ -1,0 +1,126 @@
+<%= render :partial => 'nav' -%>
+
+<h3>The Bookmarklet</h3>
+
+<p>The Hid.im bookmarklet allows someone to covert a hidim to a torrent and save it to 
+disk.  First, it loads hidim_reader.js into the page and calls HidimReader.init(), which
+loads the reader's helper files:
+
+<pre class="sh_javascript">// Initialize helper scripts
+var helpers = ["sha1.js", "base64.js", "bdecode.js", "read_png.js"];
+for(var i = 0; i < helpers.length; i++) {
+  var n = document.createElement('script');
+  n.setAttribute('language', 'Javascript');
+  n.setAttribute('src', 'http://hid.im/javascripts/'+helpers[i]);
+  document.body.appendChild(n);
+}
+</pre>
+
+<p>
+It also begins watching all of the images for clicks, and simulating links on hover:
+</p>
+
+<pre class="sh_javascript">var images = document.getElementsByTagName('img');
+
+for(var i = 0; i < images.length; i++) {
+  var image = images[i];
+  image.addEventListener('click', this.addInfo, false);
+  image.addEventListener('mouseover', 
+                         function() {
+		           this.style.cursor = "pointer";
+                         }, 
+                         false);
+}
+</pre>
+
+<p>
+When an image is clicked, it invokes PngReader.readPng (terrible name, I know) which
+creates a new canvas element, copies the image to it, and extracts the image data:
+<p>
+
+<pre class="sh_javascript">extractFromImg: function(img) {
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+
+  canvas.width = img.width;
+  canvas.height = img.height;
+  context.drawImage(img, 0, 0);
+
+  return context.getImageData(0, 0, img.width, img.height).data;
+}</pre>
+
+<p>
+One of the interesting properties of HTML5's canvas tag is that it allows direct pixel
+manipulation: getImageData returns a CanvasPixelArray which allows us to iterate through
+the whole image.
+</p>
+
+<p>
+In order to allow embedding a hidim in another image and generally avoid problems, 
+we discard the alpha channel.  We can do this by grouping the array into pixel values
+(red, green, blue, alpha) and lopping off the fourth element of each one.  We then
+group the array of pixels into an array of rows.
+</p>
+
+<p>
+Since we want to read from bottom-to-top rather than left-to-right, we reverse the array
+and transpose.  Now we have the data in a form that is useful to us.
+</p>
+
+<p>
+The next step is searching for the hidim key:
+<p>
+
+<pre class="sh_javascript">// Find the beginning of our data by looking for the key
+var dataStart = this.containsArray(torrent, key);
+</pre>
+
+<p>
+The key serves two purposes: it identifies the image as a hidim and it tells us where to
+begin reading data.  We read the line height first, because it tells us how far to read
+before looping back to the next line.  Next, we re-adjust the image array to only read
+from the hidim:
+</p>
+
+<pre class="sh_javascript">adjustForLineHeight: function(data, initialPosition, newHeight, imgHeight) {
+  var contentLength = newHeight * 3;
+  var lineLength = imgHeight * 3;
+  var output = [];
+  var position = initialPosition;
+
+  while(position + contentLength < data.length) {
+    output = output.concat(data.slice(position, position + contentLength));
+    position = position + lineLength;
+  }
+  return output;
+},
+</pre>
+
+<p>
+PngReader.readPng() produces a hash including the data, the SHA1 hash of the torrent,
+the length, and other details.  We take the data in string form and convert it to Base64
+in order to serve it up as a file:
+</p>
+
+<pre class="sh_javascript">var data = "data:application/x-bittorrent;base64,";
+data += Base64.encode(a.file.data);
+var downloadLink = document.createElement('a');
+downloadLink.href = data;
+</pre>
+
+<p>
+Unfortunately, support for data-uri varies.  Firefox opens the Open/Save File dialog box
+and offers to save the file with a random string for a filename.  Safari names its file
+"DownloadedFile.torrent", but downoads it in the background with no indication that the
+downoad has succeeded.  Chrome does not seem to support a data-uri of this length at all.
+</p>
+
+<p>
+To get around this problem for Firefox users there is a Firefox extension which saves
+hidims in exactly the same manner, but presents a much nicer "Save Torrent As..." dialog
+to the user.
+</p>
+
+<script type="text/javascript">
+  sh_highlightDocument();
+</script>

@@ -11,7 +11,7 @@
 
   <link rel="icon" type="image/png" href="/images/icon-16.png">
 
-  <%= stylesheet_link_tag "jquery.lightbox", "application" -%>
+  <%= stylesheet_link_tag "jquery.lightbox", "application", "syntax" -%>
 
   <!--[if IE 6]>
     <%= stylesheet_link_tag 'base_ie6', 'application_ie6' -%>
@@ -20,7 +20,7 @@
     <%= stylesheet_link_tag 'base_ie7', 'application_ie7' -%>
   <![endif]-->
 
-  <%= javascript_include_tag 'jquery-1.3.2.min', 'jquery.lightbox.min' -%>
+  <%= javascript_include_tag 'jquery-1.3.2.min', 'jquery.lightbox.min', 'syntax/sh_main.min', 'syntax/sh_javascript.min' -%>
 </head>
 
 <body>
@@ -37,10 +37,11 @@
   <div id="footer">
     <p>
       Hid.im is a <a href="http://nuttnet.net">mnutt</a> and <a href="http://zootella.com">zootella</a> production.
+      &nbsp; Feedback: <a href="mailto:feedback@hid.im">feedback@hid.im</a>
     </p>
   </div>
 
-<%= render :partial => 'tracker' -%>
+<%= render :partial => 'hidims/tracker' -%>
 
 </body>
 </html>

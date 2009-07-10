@@ -41,7 +41,7 @@ h1 {
   margin: 0 20px -60px 260px;
 }
 
-h2.first {
+h2.first, h3.first {
   padding-top: 2em;
 }
 
@@ -59,6 +59,7 @@ h2 {
 p {
   font-size: 0.9em;
   line-height: 1.3em;
+  margin-bottom: 1em;
 }
 #create_wrapper, #extension_wrapper {
   width: 50%;
@@ -172,13 +173,17 @@ p {
   line-height: 1.6em;
 }
 
+#about_nav {
+  margin: 1em 0;
+}
+
 img.icon {
   border: 0;
   margin: 0 -1px -3px 0;
 }
 
 p {
-  margin-bottom: 0.4em;
+  margin-bottom: 1.1em;
 }
 
 a {
@@ -187,6 +192,11 @@ a {
   padding: 2px 2px 1px 2px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+}
+
+a.bookmarklet {
+  background-color: #CCC !important;
+  border: 1px solid #AAA;
 }
 
 @font-face {
@@ -212,4 +222,13 @@ a {
 img { behavior: url(/iepngfix.htc) }
 a img {
   border: 0;
+}
+
+ul, ol {
+  margin-bottom: 1em;
+}
+
+h3 {
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 1em;
 }

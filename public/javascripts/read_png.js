@@ -226,11 +226,20 @@ var PngReader = {
     }
     // Firebug.Console.log("computed sha1: " + computedHash);
 
+    if(typeof(BitTorrent) == "undefined") {
+      var bdecoded = null;
+    } else {
+      try {
+        var bdecoded = BitTorrent.bdecode(content);
+      } catch(err) {}
+    }
+
     var result = {
       file: {
 	data: content,
 	sha1: computedHash
       },
+      torrent: bdecoded,
       fileName: torrentFilename,
       sha1: torrentHash,
       length: contentLength,

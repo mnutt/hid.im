@@ -1,0 +1,42 @@
+<%= render :partial => 'nav' -%>
+
+<h3>Hid.im image format</h3>
+<img style="float: right; margin: 0px 10px 0px 10px" src="/images/hidim_reading_pixels.png"/>
+
+
+<p>A hidim is a torrent that is embedded inside of a 24-bit png.  The data portion of a 
+hidim does not need to fill the image.</p>
+
+<p>Torrent data is read upward and to the right.</p>
+
+<p>The torrent is broken up into 3-byte segments, and each segment represents red, 
+green, and blue channels in a pixel.</p>
+
+
+<p>Each hidim is identified by the hidim key:</p>
+
+<p style="clear: both"><code>[104, 105, 100, 105, 109, 32, 105, 115, 32, 116, 111, 114, 114, 101, 110, 116, 115, 33]</code></p>
+
+<p>This byte array identifies the image as a hidim and marks the start of hidim data.  
+The hidim reader starts at the hidim key, reads the metadata to determine the column 
+height and data length, then reads column-by-column to the right until the data length 
+has been reached.</p>
+
+<h3>Metadata format</h3>
+  
+<p>Metadata is similar to bencoding and has the following attributes:</p>
+<ol class="arabic simple">
+  <li>line length -- bencoded integer</li>
+  <li>filename -- bencoded string</li>
+  <li>sha1 hash of .torrent file -- bencoded string</li>
+  <li>data -- bencoded string</li>
+</ol>
+
+<p>Example metadata:</p>
+<code>i30e14:ubuntu.torrent40:f572d396fae9206628714fb2ce00f72e94f2258f30592:d8:anno...</code>
+
+<p>Metadata is stacked together without separators.</p>
+
+<script type="text/javascript">
+  sh_highlightDocument();
+</script>

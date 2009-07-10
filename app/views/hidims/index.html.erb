@@ -1,10 +1,7 @@
 <div class="section" id="intro">
-  <h2 class="first">Hidims embed torrents in images</h2>
-  <p>
-    A Hidim turns a torrent into a regular PNG image that can be saved and posted anywhere that images 
-    can be posted.  It can even be pasted into another image such as a personal sig as long as the 
-    file is saved as a 24-bit PNG and no colors are changed.
-  </p>
+  <h2 class="first">A Hidim turns a torrent into a regular PNG image</h2>
+
+  <p>You save the png yourself. You can post it anywhere. People can decode it, but it can't be searched for... it won't turn up in searches for those torrents, unless you provide text that matches.</p>
 </div>
 
 <div id="create_wrapper">
@@ -21,15 +18,15 @@
     </a>
     <h2>Decode a hidim</h2>
     <p>
-      <a href="https://addons.mozilla.org/en-US/firefox/addon/12858/">
-	<img class="icon" src="/images/firefox-16.png"> 
-	Get the Firefox extension from addons.mozilla.org
-      </a>
+      Bookmarklet:
+      <a class="bookmarklet" href="javascript:(function(){if(typeof%20HidimReader!='undefined'){HidimReader.init();}else{var%20n=document.createElement('script');n.setAttribute('language','JavaScript');n.setAttribute('src','http://hid.im/javascripts/hidim_reader.js');document.body.appendChild(n);}})();;">Decode Hidim</a> 
+      <small>(requires Firefox 3 or Safari 4)</small>
     </p>
     <p>
-      An experimental bookmarklet:
-      <a href="javascript:(function(){if(typeof%20HidimReader!='undefined'){HidimReader.init();}else{var%20n=document.createElement('script');n.setAttribute('language','JavaScript');n.setAttribute('src','http://hid.im/javascripts/hidim_reader.js');document.body.appendChild(n);}})();;">Decode Hidim</a><br/>
-      (requires Firefox 3 or Safari 4)
+      <a href="https://addons.mozilla.org/en-US/firefox/addon/12858/">
+        <img class="icon" src="/images/firefox-16.png">
+        Get the Firefox extension from addons.mozilla.org
+      </a>
     </p>
   </div>
 </div>
@@ -44,6 +41,7 @@
   </div>
 <% end -%>
 
+
 <div class="section" id="recent">
   <h2>Sample hidim'd torrents</h2>
   <ul>
@@ -54,6 +52,11 @@
     <% end -%>
   </ul>
 </div>
+
+<p>Read more about how hidims work:
+  <%= link_to "The Bookmarklet", about_url(:action => 'bookmarklet') -%>,
+  <%= link_to "Hidim Format", about_url(:action => 'format') -%>
+</p>
 
 <div class="section" id="opensource">
   <h2>Open Source</h2>

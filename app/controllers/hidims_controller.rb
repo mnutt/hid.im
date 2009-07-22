@@ -1,5 +1,7 @@
 class HidimsController < ApplicationController
   caches_page :index
+ 
+  protect_from_forgery :except => [:create]
 
   def new
     @hidim = Hidim.new

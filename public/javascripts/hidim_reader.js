@@ -40,8 +40,9 @@ var HidimReader = {
 
     var images = document.getElementsByTagName('img');
 
-    for(var i = 0; i < images.length; i++) {
-      var image = images[i];
+    for(var image, i = 0; i < images.length; i++) {
+      image = images[i];
+      if (image.height != 32) continue; // that should do the trick.
       image.addEventListener('click', this.addInfo, false);
       image.addEventListener('mouseover', function() {this.style.cursor = "pointer";}, false);
     }
@@ -55,7 +56,7 @@ var HidimReader = {
       document.body.removeChild(document.getElementById(a.sha1));
       return false;
     }
-    var data = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data);
+    var data = "data:application/x-bittorrent;base64,"+Base64.encode(a.file.data); // why not window.btoa(a.file.data)?
 
     var infoButton = document.createElement('div');
     infoButton.style.backgroundColor = "#000000";
